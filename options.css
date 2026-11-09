@@ -1,0 +1,36 @@
+:root {
+  color-scheme: light dark;
+  font: 16px/1.6 system-ui, "Microsoft JhengHei", sans-serif;
+}
+body { margin: 0; }
+main { max-width: 42rem; margin: 0 auto; padding: 1.5rem; }
+h1 { font-size: 1.5rem; }
+h2 { font-size: 1.2rem; margin-top: 2rem; }
+section, details { border-top: 1px solid #8886; }
+summary { cursor: pointer; padding: .5rem 0; font-weight: 600; }
+label { display: block; margin-top: 1rem; font-weight: 600; }
+input:not([type="checkbox"]), textarea, select {
+  box-sizing: border-box; width: 100%; padding: .5rem; font: inherit;
+  border: 1px solid #888; border-radius: 4px;
+}
+.check { display: flex; align-items: center; gap: .5rem; margin: 1rem 0; }
+.check label { margin: 0; }
+input[type="checkbox"] { width: 1.2rem; height: 1.2rem; }
+button {
+  font: inherit; padding: .5rem 1rem; border: 1px solid #6441a5; border-radius: 4px;
+  background: #6441a5; color: #fff; cursor: pointer;
+}
+button[disabled] { opacity: .55; cursor: not-allowed; }
+.buttons { display: flex; flex-wrap: wrap; gap: .75rem; }
+:focus-visible { outline: 3px solid #f0a500; outline-offset: 2px; }
+.hint { margin: .25rem 0; font-size: .9rem; opacity: .8; }
+.feedback:empty { display: none; }
+.feedback { padding: .75rem; border-radius: 4px; border: 1px solid #2e7d32; }
+.feedback.error { border-color: #c62828; }
+.pending { padding: .75rem; border: 1px dashed #6441a5; border-radius: 4px; margin-bottom: 1rem; }
+.code { font-family: ui-monospace, monospace; font-size: 1.2rem; letter-spacing: .1em; }
+dl { display: grid; grid-template-columns: max-content 1fr; gap: .25rem 1rem; }
+dt { font-weight: 600; }
+dd { margin: 0; overflow-wrap: anywhere; white-space: pre-line; }
+textarea { resize: vertical; }
+.buttons select { width: auto; flex: 1 1 10rem; }

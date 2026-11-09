@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Twitch 開台自動開啟：設定</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+<main>
+  <h1>Twitch 開台自動開啟</h1>
+  <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+
+  <details open>
+    <summary>首次設定步驟</summary>
+    <ol>
+      <li>到 <a href="https://dev.twitch.tv/console/apps" target="_blank" rel="noopener noreferrer">Twitch 開發者主控台</a>（需先啟用兩步驟驗證）按「Register Your Application」。</li>
+      <li>名稱自訂；OAuth Redirect URL 填 <code>http://localhost</code>（本工具不會使用）；類別選 Application Integration 或 Other；用戶端類型選「公開」(Public)。</li>
+      <li>複製 Client ID 貼到下方，填入要監看的頻道後按「儲存設定」。不需要也不要填用戶端密碼。</li>
+      <li>按「連接 Twitch」，在 Twitch 頁面確認授權；完成前請保持本分頁開啟。</li>
+    </ol>
+    <p class="hint">需保持瀏覽器執行中；電腦睡眠或關閉瀏覽器時會暫停檢查。約每分鐘檢查一次，但不保證準時。</p>
+    <p class="hint">開台時會切到直播分頁並保持影片播放 5 分鐘（會解除靜音，音量沿用 Twitch 播放器設定）；影片開始播放後你切到別的分頁也會繼續播。</p>
+  </details>
+
+  <section aria-labelledby="settings-title">
+    <h2 id="settings-title">設定</h2>
+    <form id="settings-form" novalidate>
+      <label for="clientId">Twitch Client ID</label>
+      <input id="clientId" name="clientId" autocomplete="off" spellcheck="false" required>
+
+      <label for="channels">監看的 Twitch 頻道（每行一個）</label>
+      <textarea id="channels" name="channels" rows="6" autocomplete="off" spellcheck="false" required
+                aria-describedby="channels-hint"
+                placeholder="shroud&#10;https://www.twitch.tv/lilypichu&#10;pokimane https://example.com/page"></textarea>
+      <p id="channels-hint" class="hint">每行輸入一個頻道帳號或頻道網址（最多 100 個）。要開其他網址時，在頻道後空一格接上網址；沒填就開該頻道的 Twitch 頁面。若已有相同網址的分頁，會重新整理它而不是另開。</p>
+
+      <div class="check">
+        <input id="enabled" name="enabled" type="checkbox">
+        <label for="enabled">啟用監控</label>
+      </div>
+
+      <button type="submit">儲存設定</button>
+    </form>
+  </section>
+
+  <section aria-labelledby="auth-title">
+    <h2 id="auth-title">Twitch 連線</h2>
+    <p>狀態：<strong id="connection">讀取中…</strong></p>
+    <div id="pending" class="pending" hidden>
+      <p>請開啟 <a id="verify-link" target="_blank" rel="noopener noreferrer">Twitch 授權頁面</a>，確認代碼 <strong id="user-code" class="code"></strong> 後按同意。</p>
+      <p class="hint">完成前請保持本分頁開啟；本頁會自動確認結果。</p>
+    </div>
+    <div class="buttons">
+      <button type="button" id="connect">連接 Twitch</button>
+      <button type="button" id="disconnect">中斷本機授權</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="monitor-title">
+    <h2 id="monitor-title">監控狀態</h2>
+    <dl>
+      <dt>監控</dt><dd id="monitor"></dd>
+      <dt>上次檢查</dt><dd id="last-check"></dd>
+      <dt>上次動作</dt><dd id="last-action"></dd>
+      <dt>錯誤</dt><dd id="last-error"></dd>
+    </dl>
+    <div class="buttons">
+      <button type="button" id="check-now">立即檢查</button>
+    </div>
+    <label for="test-channel">測試的頻道</label>
+    <div class="buttons">
+      <select id="test-channel"></select>
+      <button type="button" id="test-open">測試開啟／重新整理</button>
+    </div>
+    <p class="hint">「測試」使用已儲存的設定，不需要 Twitch 授權，也不影響開台判斷。</p>
+  </section>
+</main>
+<script src="options.js"></script>
+</body>
+</html>

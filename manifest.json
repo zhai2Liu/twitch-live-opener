@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Twitch 開台自動開啟",
+  "version": "1.2.0",
+  "description": "監看多個 Twitch 頻道，開台時開啟或重新整理指定網頁，並保持直播影片播放。",
+  "minimum_chrome_version": "120",
+  "permissions": ["storage", "alarms", "tabs", "scripting"],
+  "host_permissions": ["https://api.twitch.tv/*", "https://id.twitch.tv/*", "https://www.twitch.tv/*", "https://twitch.tv/*"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": { "default_title": "Twitch 開台自動開啟：設定" },
+  "options_ui": { "page": "options.html", "open_in_tab": true }
+}
